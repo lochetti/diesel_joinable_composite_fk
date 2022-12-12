@@ -1,1 +1,3 @@
--- This file should undo anything in `up.sql`
+DROP TABLE transaction;
+DROP TABLE payment_card;
+DROP TABLE person;
