@@ -1,0 +1,21 @@
+diff --git a/src/schema.rs b/src/schema.rs
+index c2d627d..a50b1e9 100644
+--- a/src/schema.rs
++++ b/src/schema.rs
+@@ -20,14 +20,14 @@ diesel::table! {
+         id -> Int4,
+         payment_card_id -> Int4,
+         card_code -> Text,
+     }
+ }
+ 
+-diesel::joinable!(transaction_one -> payment_card (card_code));
+-diesel::joinable!(transaction_two -> payment_card (payment_card_id));
++diesel::joinable!(transaction_one -> payment_card (card_code)); // This joinable is wrong and, in that case, definitely not safe. 
++diesel::joinable!(transaction_two -> payment_card (payment_card_id)); // This joinable is wrong because the FK is composite and might not be safe.
+ 
+ diesel::allow_tables_to_appear_in_same_query!(
+     payment_card,
+     transaction_one,
+     transaction_two,
+ );
